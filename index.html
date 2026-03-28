@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programa CRIA — Capacitação em Renda e Inteligência Artificial</title>
+  <meta name="description" content="Programa CRIA: capacitação em IA para mulheres empreendedoras de comunidades vulneráveis. 16 mulheres, 8 duplas, 384 vidas transformadas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark-bg: #1A0A2E;
+      --dark-bg2: #0F1B2D;
+      --card-bg: #1E293B;
+      --magenta: #F72585;
+      --golden: #FFD93D;
+      --green: #6BCB77;
+      --blue: #4D96FF;
+      --purple: #C084FC;
+      --coral: #FF6B6B;
+      --orange: #FF8C42;
+      --teal: #00B4D8;
+      --white: #FFFFFF;
+      --off-white: #F8F9FA;
+      --text-light: #E2E8F0;
+      --text-muted: #94A3B8;
+      --warm-bg: #FFF5F5;
+      --warm-bg2: #FFFBEB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-light);
+      background: var(--dark-bg);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 10, 46, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 900; color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--golden); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--golden); }
+    .nav-hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px;
+    }
+    .nav-hamburger span {
+      width: 24px; height: 2px; background: var(--white); transition: 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden; padding: 6rem 2rem 4rem;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -150px; left: -150px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(247,37,133,0.15), transparent 70%);
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -100px; right: -100px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,150,255,0.12), transparent 70%);
+    }
+    .hero-content { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-label {
+      font-size: 0.85rem; font-weight: 700; color: var(--golden);
+      letter-spacing: 6px; text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; color: var(--white);
+      line-height: 1.05; margin-bottom: 1.2rem;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-light);
+      max-width: 600px; margin-bottom: 0.8rem;
+    }
+    .hero-bar { width: 80px; height: 4px; background: var(--magenta); margin: 1.5rem 0; border-radius: 2px; }
+    .hero-tagline {
+      font-size: 1rem; color: var(--text-muted); font-style: italic; max-width: 500px;
+    }
+    .hero-cta {
+      display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem;
+      background: var(--magenta); color: var(--white); font-weight: 700;
+      text-decoration: none; border-radius: 50px; font-size: 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(247,37,133,0.4);
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 5px;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900;
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem;
+    }
+
+    /* ===== PROBLEMA ===== */
+    .problema { background: var(--warm-bg); }
+    .problema .section-label { color: var(--magenta); }
+    .problema .section-title { color: var(--dark-bg); }
+    .problema .section-subtitle { color: #64748B; }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem; margin-top: 2rem;
+    }
+    .stat-card {
+      background: var(--white); border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center;
+      transition: transform 0.3s;
+    }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-num {
+      font-size: 2.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 0.3rem;
+    }
+    .stat-desc { font-size: 0.85rem; color: #64748B; line-height: 1.4; }
+    .stat-source {
+      font-size: 0.75rem; color: #94A3B8; margin-top: 2rem;
+    }
+
+    /* ===== IA GAP ===== */
+    .ia-gap { background: var(--dark-bg2); }
+    .ia-gap .section-label { color: var(--golden); }
+    .ia-gap .section-title { color: var(--white); }
+
+    .ia-card {
+      background: var(--card-bg); border-radius: 12px; padding: 1.5rem;
+      text-align: center; transition: transform 0.3s;
+    }
+    .ia-card:hover { transform: translateY(-4px); }
+    .ia-card .stat-num { color: var(--golden); font-size: 1.8rem; }
+    .ia-card .stat-desc { color: var(--text-light); }
+    .ia-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .highlight-bar {
+      background: rgba(247,37,133,0.15); border-radius: 12px;
+      padding: 1.2rem; text-align: center; margin-top: 2rem;
+      font-size: 1.1rem; font-weight: 700; color: var(--white);
+    }
+
+    /* ===== OPORTUNIDADE ===== */
+    .oportunidade { background: var(--warm-bg2); }
+    .oportunidade .section-label { color: var(--orange); }
+    .oportunidade .section-title { color: var(--dark-bg); }
+
+    .opp-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .opp-item {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 1rem; color: #334155;
+    }
+    .opp-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .opp-footer {
+      background: var(--dark-bg); border-radius: 12px; padding: 1rem 1.5rem;
+      color: var(--golden); font-style: italic; font-size: 0.95rem;
+    }
+
+    /* ===== SOLUÇÃO ===== */
+    .solucao { background: var(--dark-bg); position: relative; overflow: hidden; }
+    .solucao::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(247,37,133,0.1), transparent 70%);
+    }
+    .solucao .section-label { color: var(--golden); }
+    .solucao .section-title { color: var(--white); }
+    .solucao .section-subtitle { color: var(--text-light); }
+
+    .kit-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem; position: relative; z-index: 1;
+    }
+    .kit-card {
+      background: var(--card-bg); border-radius: 12px; padding: 1.2rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: transform 0.3s;
+    }
+    .kit-card:hover { transform: translateY(-3px); }
+    .kit-icon {
+      width: 50px; height: 50px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .kit-label { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+    .kit-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+    /* ===== METODOLOGIA ===== */
+    .metodologia { background: var(--off-white); }
+    .metodologia .section-label { color: var(--magenta); }
+    .metodologia .section-title { color: var(--dark-bg); }
+
+    .phases-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .phase-card {
+      background: var(--white); border-radius: 16px; padding: 2rem 1.5rem;
+      text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: relative; overflow: hidden; transition: transform 0.3s;
+    }
+    .phase-card:hover { transform: translateY(-4px); }
+    .phase-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .phase-card:nth-child(1)::before { background: var(--magenta); }
+    .phase-card:nth-child(2)::before { background: var(--blue); }
+    .phase-card:nth-child(3)::before { background: var(--green); }
+    .phase-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 900; color: var(--white);
+      margin: 0 auto 1rem;
+    }
+    .phase-card:nth-child(1) .phase-num { background: var(--magenta); }
+    .phase-card:nth-child(2) .phase-num { background: var(--blue); }
+    .phase-card:nth-child(3) .phase-num { background: var(--green); }
+    .phase-title {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .phase-card:nth-child(1) .phase-title { color: var(--magenta); }
+    .phase-card:nth-child(2) .phase-title { color: var(--blue); }
+    .phase-card:nth-child(3) .phase-title { color: var(--green); }
+    .phase-weeks { font-size: 0.8rem; color: #94A3B8; margin-bottom: 0.8rem; }
+    .phase-desc { font-size: 0.9rem; color: #475569; line-height: 1.6; }
+
+    /* ===== MÓDULOS ===== */
+    .modulos { background: var(--dark-bg); }
+    .modulos .section-label { color: var(--golden); }
+    .modulos .section-title { color: var(--white); }
+
+    .modules-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .module-row {
+      background: var(--card-bg); border-radius: 10px; padding: 0.8rem 1.2rem;
+      display: grid; grid-template-columns: 50px 1fr 1fr auto;
+      align-items: center; gap: 1rem;
+      border-left: 4px solid transparent;
+      transition: transform 0.2s;
+    }
+    .module-row:hover { transform: translateX(4px); }
+    .module-num { font-size: 1.2rem; font-weight: 900; }
+    .module-title { font-weight: 700; color: var(--white); font-size: 0.9rem; }
+    .module-desc { font-size: 0.82rem; color: var(--text-muted); }
+    .module-renda {
+      font-size: 0.85rem; font-weight: 700; color: var(--golden);
+      white-space: nowrap;
+    }
+
+    .module-header {
+      background: transparent; border-left-color: transparent !important;
+      padding: 0.5rem 1.2rem; margin-bottom: 0.2rem;
+    }
+    .module-header .module-num,
+    .module-header .module-title,
+    .module-header .module-desc,
+    .module-header .module-renda {
+      font-size: 0.75rem; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .module-header .module-renda { color: var(--golden); }
+    .module-header:hover { transform: none; }
+
+    .m1 { border-color: var(--magenta); } .m1 .module-num { color: var(--magenta); }
+    .m2 { border-color: var(--coral); } .m2 .module-num { color: var(--coral); }
+    .m3 { border-color: var(--orange); } .m3 .module-num { color: var(--orange); }
+    .m4 { border-color: var(--blue); } .m4 .module-num { color: var(--blue); }
+    .m5 { border-color: var(--teal); } .m5 .module-num { color: var(--teal); }
+    .m6 { border-color: var(--green); } .m6 .module-num { color: var(--green); }
+    .m7 { border-color: var(--purple); } .m7 .module-num { color: var(--purple); }
+    .m8 { border-color: var(--blue); } .m8 .module-num { color: var(--blue); }
+    .m9 { border-color: var(--magenta); } .m9 .module-num { color: var(--magenta); }
+    .m10 { border-color: var(--golden); } .m10 .module-num { color: var(--golden); }
+
+    /* ===== MULTIPLICADOR ===== */
+    .multiplicador { background: var(--off-white); }
+    .multiplicador .section-label { color: var(--magenta); }
+    .multiplicador .section-title { color: var(--dark-bg); }
+
+    .multi-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center;
+    }
+    .multi-layers { display: flex; flex-direction: column; gap: 1.2rem; }
+    .layer {
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .layer-num { font-size: 1.6rem; font-weight: 900; min-width: 60px; }
+    .layer-label { font-weight: 700; color: var(--dark-bg); font-size: 0.95rem; }
+    .layer-sub { font-size: 0.82rem; color: #64748B; margin-top: 0.2rem; }
+
+    .multi-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; height: 320px;
+    }
+    .circle {
+      position: absolute; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .circle-outer { width: 300px; height: 300px; background: rgba(107,203,119,0.15); }
+    .circle-mid { width: 220px; height: 220px; background: rgba(77,150,255,0.2); }
+    .circle-inner {
+      width: 130px; height: 130px; background: var(--magenta);
+      color: var(--white); font-size: 2.5rem; font-weight: 900;
+    }
+
+    .multi-callout {
+      background: var(--dark-bg); border-radius: 12px; padding: 1rem;
+      text-align: center; margin-top: 2rem; color: var(--golden);
+      font-size: 1.1rem; font-weight: 700;
+    }
+
+    /* ===== IMPACTO ===== */
+    .impacto { background: var(--dark-bg2); }
+    .impacto .section-label { color: var(--golden); }
+    .impacto .section-title { color: var(--white); }
+
+    .impacto-grid {
+      display: grid; grid-template-columns: 1fr 300px; gap: 2rem;
+      align-items: start;
+    }
+
+    .impacto-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border-radius: 12px; overflow: hidden;
+    }
+    .impacto-table th {
+      background: var(--card-bg); color: var(--text-muted); font-size: 0.8rem;
+      font-weight: 600; padding: 0.8rem 1rem; text-align: left;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .impacto-table th:not(:first-child) { text-align: center; }
+    .impacto-table td {
+      padding: 0.7rem 1rem; font-size: 0.9rem;
+    }
+    .impacto-table td:not(:first-child) { text-align: center; font-weight: 700; }
+    .impacto-table tr:nth-child(odd) td { background: rgba(15,27,45,0.8); }
+    .impacto-table tr:nth-child(even) td { background: rgba(22,34,54,0.8); }
+    .impacto-table td:nth-child(2) { color: var(--golden); }
+    .impacto-table td:nth-child(3) { color: var(--green); }
+    .impacto-table tr:last-child td { font-size: 1rem; }
+
+    .custo-callout {
+      background: var(--magenta); border-radius: 16px; padding: 2rem;
+      text-align: center; color: var(--white);
+    }
+    .custo-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.9;
+    }
+    .custo-valor {
+      font-size: 2.8rem; font-weight: 900; margin-bottom: 0.3rem;
+    }
+    .custo-sub { font-size: 1rem; opacity: 0.85; }
+    .custo-note {
+      font-size: 0.85rem; font-style: italic; opacity: 0.7; margin-top: 0.8rem;
+    }
+
+    /* ===== ODS ===== */
+    .ods { background: var(--white); }
+    .ods .section-label { color: var(--dark-bg); }
+    .ods .section-title { color: var(--dark-bg); }
+
+    .ods-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem; max-width: 900px; margin: 0 auto;
+    }
+    .ods-card {
+      display: flex; flex-direction: column; align-items: center;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s;
+      background: var(--off-white);
+    }
+    .ods-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+    .ods-icon-wrap {
+      width: 100%; max-width: 180px; aspect-ratio: 1; overflow: hidden;
+      margin: 0 auto;
+    }
+    .ods-icon-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .ods-body { padding: 0.8rem 1rem 1rem; flex: 1; text-align: center; }
+    .ods-title { font-weight: 700; color: var(--dark-bg); font-size: 0.85rem; margin-bottom: 0.25rem; }
+    .ods-desc { font-size: 0.78rem; color: #64748B; line-height: 1.5; }
+
+    /* ===== PREMIAÇÃO ===== */
+    .premiacao { background: var(--dark-bg); position: relative; overflow: hidden; }
+    .premiacao::after {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,217,61,0.08), transparent 70%);
+    }
+    .premiacao .section-label { color: var(--golden); }
+    .premiacao .section-title { color: var(--white); }
+    .premiacao .section-subtitle { color: var(--text-light); }
+
+    .premios-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem; position: relative; z-index: 1;
+    }
+    .premio-card {
+      background: var(--card-bg); border-radius: 14px; padding: 1.8rem;
+      text-align: center; position: relative; overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .premio-card:hover { transform: translateY(-4px); }
+    .premio-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .premio-card:nth-child(1)::before { background: var(--golden); }
+    .premio-card:nth-child(2)::before { background: var(--magenta); }
+    .premio-card:nth-child(3)::before { background: var(--teal); }
+    .premio-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .premio-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .premio-card:nth-child(1) .premio-title { color: var(--golden); }
+    .premio-card:nth-child(2) .premio-title { color: var(--magenta); }
+    .premio-card:nth-child(3) .premio-title { color: var(--teal); }
+    .premio-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ===== CTA FINAL ===== */
+    .cta-final {
+      background: var(--dark-bg); padding: 5rem 2rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-final::before {
+      content: ''; position: absolute; top: -100px; left: 50%;
+      transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(247,37,133,0.08), transparent 70%);
+    }
+    .cta-title {
+      font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 900;
+      color: var(--white); max-width: 700px; margin: 0 auto 2.5rem;
+      position: relative; z-index: 1; line-height: 1.3;
+    }
+    .big-numbers {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem; max-width: 700px; margin: 0 auto 2.5rem;
+      position: relative; z-index: 1;
+    }
+    .big-num-item { text-align: center; }
+    .big-num-value { font-size: 2.5rem; font-weight: 900; }
+    .big-num-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .cta-phrase {
+      font-size: 1.1rem; color: var(--text-light); font-style: italic;
+      max-width: 600px; margin: 0 auto 2rem;
+      position: relative; z-index: 1;
+    }
+    .cta-button {
+      display: inline-block; padding: 1.2rem 3rem;
+      background: var(--magenta); color: var(--white); font-weight: 800;
+      text-decoration: none; border-radius: 50px; font-size: 1.1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; z-index: 1;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(247,37,133,0.4);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark-bg2); padding: 2rem;
+      text-align: center; font-size: 0.8rem; color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ===== TABLET ===== */
+    @media (max-width: 1024px) {
+      .ods-grid { grid-template-columns: repeat(4, 1fr); max-width: 700px; }
+      .ods-icon-wrap { max-width: 140px; }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(26,10,46,0.98); padding: 1.5rem 2rem;
+        gap: 1rem;
+      }
+      .multi-content { grid-template-columns: 1fr; }
+      .multi-visual { height: 250px; }
+      .circle-outer { width: 220px; height: 220px; }
+      .circle-mid { width: 160px; height: 160px; }
+      .circle-inner { width: 100px; height: 100px; font-size: 2rem; }
+      .impacto-grid { grid-template-columns: 1fr; }
+      .ods-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; max-width: 400px; }
+      .ods-icon-wrap { max-width: 120px; }
+      .module-header { display: none; }
+      .module-row {
+        grid-template-columns: 40px 1fr;
+        gap: 0.5rem;
+      }
+      .module-desc { display: none; }
+      .module-renda { grid-column: 1 / -1; font-size: 0.8rem; }
+      section { padding: 3.5rem 1.2rem; }
+      .hero { padding: 5rem 1.2rem 3rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .kit-grid { grid-template-columns: 1fr; }
+      .phases-grid { grid-template-columns: 1fr; }
+      .premios-grid { grid-template-columns: 1fr; }
+      .big-numbers { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .ods-grid { grid-template-columns: repeat(2, 1fr); max-width: 300px; margin: 0 auto; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .big-numbers { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .hero h1 { font-size: 3rem; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">PROGRAMA <span>CRIA</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#problema">O Problema</a></li>
+    <li><a href="#solucao">A Solução</a></li>
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#multiplicador">Impacto</a></li>
+    <li><a href="#ods">ODS</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-label">Programa</p>
+    <h1>CRIA</h1>
+    <p class="hero-subtitle">Capacitação em Renda e Inteligência Artificial</p>
+    <div class="hero-bar"></div>
+    <p class="hero-tagline">Quando a tecnologia mais avançada do mundo encontra quem mais precisa dela.</p>
+    <a href="#solucao" class="hero-cta">Conheça o programa</a>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="container">
+    <p class="section-label">O ABISMO DIGITAL DE GÊNERO</p>
+    <h2 class="section-title fade-up">36 milhões de mulheres brasileiras estão fora do mercado formal.</h2>
+    <p class="section-subtitle fade-up">Enquanto a inteligência artificial transforma o mercado de trabalho, milhões de mulheres ficam para trás — não por falta de capacidade, mas por falta de acesso.</p>
+    <div class="stats-grid">
+      <div class="stat-card fade-up">
+        <div class="stat-num" style="color: var(--magenta)">50%</div>
+        <div class="stat-desc">maior desemprego feminino em comparação ao masculino</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-num" style="color: var(--coral)">63,9%</div>
+        <div class="stat-desc">dos jovens que não estudam nem trabalham são mulheres</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-num" style="color: var(--dark-bg)">20,5M</div>
+        <div class="stat-desc">de brasileiros sem acesso à internet</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-num" style="color: var(--orange)">45,6%</div>
+        <div class="stat-desc">dizem que "não sabem usar" tecnologia — não é falta de infra, é falta de capacitação</div>
+      </div>
+    </div>
+    <p class="stat-source">Fontes: IBGE/PNAD 2025, Agência Brasil</p>
+  </div>
+</section>
+
+<!-- IA GAP -->
+<section class="ia-gap">
+  <div class="container">
+    <p class="section-label">A REVOLUÇÃO DA IA</p>
+    <h2 class="section-title fade-up">A IA está transformando o mercado.<br>Mas para quem?</h2>
+    <div class="stats-grid" style="margin-top: 2rem;">
+      <div class="ia-card fade-up">
+        <div class="icon">🧠</div>
+        <div class="stat-num">52,7%</div>
+        <div class="stat-desc">dos MEIs consideram IA essencial para competir</div>
+      </div>
+      <div class="ia-card fade-up">
+        <div class="icon">🚫</div>
+        <div class="stat-num">65,7%</div>
+        <div class="stat-desc">dos MEIs ainda NÃO usam nenhuma ferramenta de IA</div>
+      </div>
+      <div class="ia-card fade-up">
+        <div class="icon">💡</div>
+        <div class="stat-num">50%</div>
+        <div class="stat-desc">não sabem como incorporar IA nos negócios</div>
+      </div>
+      <div class="ia-card fade-up">
+        <div class="icon">✅</div>
+        <div class="stat-num">74%</div>
+        <div class="stat-desc">dos que usam priorizam marketing — exatamente o que o CRIA ensina</div>
+      </div>
+    </div>
+    <div class="highlight-bar fade-up">
+      A lacuna não é tecnológica. É de acesso e orientação.
+    </div>
+  </div>
+</section>
+
+<!-- OPORTUNIDADE -->
+<section class="oportunidade">
+  <div class="container">
+    <p class="section-label">A OPORTUNIDADE</p>
+    <h2 class="section-title fade-up">E se a ferramenta mais poderosa do século XXI pudesse estar nas mãos de quem mais precisa?</h2>
+    <div class="opp-list fade-up">
+      <div class="opp-item">
+        <div class="opp-icon" style="background: rgba(77,150,255,0.1)">📝</div>
+        <span>Escrever textos profissionais para quem não é plenamente alfabetizado</span>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon" style="background: rgba(255,140,66,0.1)">🏪</div>
+        <span>Criar cardápios, catálogos e sites para quem nunca usou um computador</span>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon" style="background: rgba(107,203,119,0.1)">💰</div>
+        <span>Calcular preços e margens para quem administra no caderninho</span>
+      </div>
+      <div class="opp-item">
+        <div class="opp-icon" style="background: rgba(0,180,216,0.1)">💬</div>
+        <span>Gerar conteúdo de redes sociais para quem vende na porta de casa</span>
+      </div>
+    </div>
+    <div class="opp-footer fade-up">
+      Pela primeira vez, uma tecnologia pode democratizar competências que antes exigiam anos de estudo.
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section class="solucao" id="solucao">
+  <div class="container">
+    <p class="section-label">A SOLUÇÃO</p>
+    <h2 class="section-title fade-up">Programa CRIA</h2>
+    <p class="section-subtitle fade-up">Um programa completo de inclusão produtiva digital que capacita mulheres de comunidades vulneráveis a gerar renda usando inteligência artificial.</p>
+    <div class="kit-grid">
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(77,150,255,0.15)">💻</div>
+        <div><div class="kit-label">Chromebook</div><div class="kit-desc">Patrimônio permanente da família</div></div>
+      </div>
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(247,37,133,0.15)">🧠</div>
+        <div><div class="kit-label">Claude Pro por 1 ano</div><div class="kit-desc">IA generativa avançada</div></div>
+      </div>
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(0,180,216,0.15)">📶</div>
+        <div><div class="kit-label">4G por 12 meses</div><div class="kit-desc">Conectividade garantida</div></div>
+      </div>
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(107,203,119,0.15)">📚</div>
+        <div><div class="kit-label">10 encontros presenciais</div><div class="kit-desc">Curso intensivo de 5 semanas</div></div>
+      </div>
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(192,132,252,0.15)">👥</div>
+        <div><div class="kit-label">6 meses de acompanhamento</div><div class="kit-desc">Encontros mensais pós-curso</div></div>
+      </div>
+      <div class="kit-card fade-up">
+        <div class="kit-icon" style="background: rgba(255,217,61,0.15)">🤝</div>
+        <div><div class="kit-label">Duplas colaborativas</div><div class="kit-desc">Mentoria entre pares</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section class="metodologia">
+  <div class="container">
+    <p class="section-label">METODOLOGIA</p>
+    <h2 class="section-title fade-up">Aprender fazendo. Cada aula gera renda.</h2>
+    <div class="phases-grid">
+      <div class="phase-card fade-up">
+        <div class="phase-num">1</div>
+        <div class="phase-title">CURSO INTENSIVO</div>
+        <div class="phase-weeks">5 semanas — 2× por semana</div>
+        <div class="phase-desc">10 módulos progressivos com entregáveis reais e Desafio de Renda em cada aula. 16 participantes em 8 duplas de trabalho.</div>
+      </div>
+      <div class="phase-card fade-up">
+        <div class="phase-num">2</div>
+        <div class="phase-title">ACOMPANHAMENTO</div>
+        <div class="phase-weeks">6 meses — encontros mensais</div>
+        <div class="phase-desc">Turma unificada para troca de experiências, rodas de negócios, mentoria entre pares e suporte contínuo via WhatsApp.</div>
+      </div>
+      <div class="phase-card fade-up">
+        <div class="phase-num">3</div>
+        <div class="phase-title">MULTIPLICAÇÃO</div>
+        <div class="phase-weeks">contínuo</div>
+        <div class="phase-desc">Cada dupla compartilha seus aprendizados com mais 4 mães da comunidade. O conhecimento se espalha organicamente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="modulos" id="modulos">
+  <div class="container">
+    <p class="section-label">OS 10 MÓDULOS</p>
+    <h2 class="section-title fade-up">Do primeiro clique ao primeiro cliente</h2>
+    <div class="modules-list">
+      <div class="module-row module-header"><div class="module-num">#</div><div class="module-title">Módulo</div><div class="module-desc">Descrição</div><div class="module-renda">Receita esperada</div></div>
+      <div class="module-row m1 fade-up"><div class="module-num">01</div><div class="module-title">Minha sócia digital</div><div class="module-desc">Primeiro contato com a IA</div><div class="module-renda">Aquecimento</div></div>
+      <div class="module-row m2 fade-up"><div class="module-num">02</div><div class="module-title">Meu negócio em palavras</div><div class="module-desc">Nome, slogan, bio profissional</div><div class="module-renda">R$ 20-50</div></div>
+      <div class="module-row m3 fade-up"><div class="module-num">03</div><div class="module-title">Cardápio e catálogo</div><div class="module-desc">Cardápio, catálogo, preços</div><div class="module-renda">R$ 50-100</div></div>
+      <div class="module-row m4 fade-up"><div class="module-num">04</div><div class="module-title">Redes sociais</div><div class="module-desc">Legendas, hashtags, posts</div><div class="module-renda">R$ 100-200/mês</div></div>
+      <div class="module-row m5 fade-up"><div class="module-num">05</div><div class="module-title">Atendimento profissional</div><div class="module-desc">WhatsApp Business, FAQ</div><div class="module-renda">R$ 30-50</div></div>
+      <div class="module-row m6 fade-up"><div class="module-num">06</div><div class="module-title">Precificação inteligente</div><div class="module-desc">Custo, margem, fornecedores</div><div class="module-renda">R$ 30-50</div></div>
+      <div class="module-row m7 fade-up"><div class="module-num">07</div><div class="module-title">Documentos profissionais</div><div class="module-desc">Orçamentos, propostas, recibos</div><div class="module-renda">R$ 30-50</div></div>
+      <div class="module-row m8 fade-up"><div class="module-num">08</div><div class="module-title">Resolvendo a vida</div><div class="module-desc">Currículo, cartas, pedidos</div><div class="module-renda">R$ 10-30</div></div>
+      <div class="module-row m9 fade-up"><div class="module-num">09</div><div class="module-title">Meu primeiro site</div><div class="module-desc">Página HTML simples no ar</div><div class="module-renda">R$ 100-200</div></div>
+      <div class="module-row m10 fade-up"><div class="module-num">10</div><div class="module-title">Pacote de serviços digitais</div><div class="module-desc">Catálogo + plano 3 meses</div><div class="module-renda">Cliente recorrente</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTIPLICADOR -->
+<section class="multiplicador" id="multiplicador">
+  <div class="container">
+    <p class="section-label">EFEITO MULTIPLICADOR</p>
+    <h2 class="section-title fade-up">16 mulheres capacitadas.<br>192 vidas transformadas.</h2>
+    <div class="multi-content">
+      <div class="multi-layers fade-up">
+        <div class="layer">
+          <div class="layer-num" style="color: var(--magenta)">16</div>
+          <div>
+            <div class="layer-label">Beneficiárias diretas</div>
+            <div class="layer-sub">Recebem computador, IA, curso completo e acompanhamento</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num" style="color: var(--blue)">+32</div>
+          <div>
+            <div class="layer-label">Mães multiplicadoras</div>
+            <div class="layer-sub">Cada dupla compartilha com 4 mães da comunidade</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num" style="color: var(--green)">+144</div>
+          <div>
+            <div class="layer-label">Familiares impactados</div>
+            <div class="layer-sub">Média de 3 familiares por mulher (48 × 3)</div>
+          </div>
+        </div>
+      </div>
+      <div class="multi-visual fade-up">
+        <div class="circle circle-outer">
+          <div class="circle circle-mid">
+            <div class="circle circle-inner">16</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="multi-callout fade-up">
+      Multiplicador: cada vaga no programa impacta 12 pessoas
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section class="impacto">
+  <div class="container">
+    <p class="section-label">IMPACTO PROJETADO EM 12 MESES</p>
+    <h2 class="section-title fade-up">Números que falam por si</h2>
+    <div class="impacto-grid fade-up">
+      <table class="impacto-table">
+        <thead>
+          <tr><th>Indicador</th><th>Conservador</th><th>Otimista</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Taxa de conclusão</td><td>75%</td><td>90%</td></tr>
+          <tr><td>Participantes gerando renda</td><td>7</td><td>12</td></tr>
+          <tr><td>Renda mensal/participante</td><td>R$ 300</td><td>R$ 600</td></tr>
+          <tr><td>Renda mensal total da turma</td><td>R$ 2.100</td><td>R$ 7.200</td></tr>
+          <tr><td>Renda total em 12 meses</td><td>R$ 25.200</td><td>R$ 86.400</td></tr>
+          <tr><td>Microempreendimentos criados</td><td>4</td><td>8</td></tr>
+        </tbody>
+      </table>
+      <div class="custo-callout">
+        <div class="custo-label">Custo mensal por vida impactada</div>
+        <div class="custo-valor">R$ 69,80</div>
+        <div class="custo-sub">por mês</div>
+        <div class="custo-note">Menos que um plano de celular.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ODS -->
+<section class="ods" id="ods">
+  <div class="container">
+    <p class="section-label">ALINHAMENTO COM OS ODS DA ONU</p>
+    <h2 class="section-title fade-up">8 Objetivos de Desenvolvimento Sustentável</h2>
+    <div class="ods-grid">
+      <div class="ods-card fade-up" data-ods="1" data-color="#E5243B">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-1.svg" alt="ODS 1 - Erradicação da Pobreza"></div>
+        <div class="ods-body"><div class="ods-title">ODS 1 — Erradicação da Pobreza</div><div class="ods-desc">Geração de renda para mulheres em situação de vulnerabilidade social.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="3" data-color="#4C9F38">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-3.svg" alt="ODS 3 - Saúde e Bem-Estar"></div>
+        <div class="ods-body"><div class="ods-title">ODS 3 — Saúde e Bem-Estar</div><div class="ods-desc">Promoção de bem-estar e saúde mental através da autonomia econômica e inclusão digital.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="4" data-color="#C5192D">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-4.svg" alt="ODS 4 - Educação de Qualidade"></div>
+        <div class="ods-body"><div class="ods-title">ODS 4 — Educação de Qualidade</div><div class="ods-desc">Capacitação tecnológica inclusiva. Meta 4.4: competências para emprego e empreendedorismo.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="5" data-color="#FF3A21">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-5.svg" alt="ODS 5 - Igualdade de Gênero"></div>
+        <div class="ods-body"><div class="ods-title">ODS 5 — Igualdade de Gênero</div><div class="ods-desc">Empoderamento econômico de mulheres, acesso igualitário a tecnologia e recursos produtivos.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="8" data-color="#A21942">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-8.svg" alt="ODS 8 - Trabalho Decente"></div>
+        <div class="ods-body"><div class="ods-title">ODS 8 — Trabalho Decente</div><div class="ods-desc">Promoção de empreendedorismo, criatividade e inovação em comunidades vulneráveis.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="10" data-color="#DD1367">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-10.svg" alt="ODS 10 - Redução das Desigualdades"></div>
+        <div class="ods-body"><div class="ods-title">ODS 10 — Redução das Desigualdades</div><div class="ods-desc">Inclusão digital e econômica de populações marginalizadas, reduzindo a desigualdade de acesso à tecnologia.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="11" data-color="#FD9D24">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-11.svg" alt="ODS 11 - Cidades Sustentáveis"></div>
+        <div class="ods-body"><div class="ods-title">ODS 11 — Cidades Sustentáveis</div><div class="ods-desc">Fortalecimento de comunidades urbanas vulneráveis com ferramentas digitais para desenvolvimento local.</div></div>
+      </div>
+      <div class="ods-card fade-up" data-ods="17" data-color="#19486A">
+        <div class="ods-icon-wrap"><img src="https://brasil.un.org/profiles/undg_country/themes/custom/undg/images/SDGs/pt-br/SDG-17.svg" alt="ODS 17 - Parcerias"></div>
+        <div class="ods-body"><div class="ods-title">ODS 17 — Parcerias</div><div class="ods-desc">Modelo de cooperação público-privada que une empresas, tecnologia e comunidades para impacto social.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIAÇÃO -->
+<section class="premiacao">
+  <div class="container">
+    <p class="section-label">PREMIAÇÃO</p>
+    <h2 class="section-title fade-up">CRIA do Ano</h2>
+    <p class="section-subtitle fade-up">Reconhecendo quem transforma oportunidade em realidade.</p>
+    <div class="premios-grid">
+      <div class="premio-card fade-up">
+        <div class="premio-icon">💰</div>
+        <div class="premio-title">Maior Faturamento</div>
+        <div class="premio-desc">A participante que gerou mais renda com serviços de IA.</div>
+      </div>
+      <div class="premio-card fade-up">
+        <div class="premio-icon">❤️</div>
+        <div class="premio-title">Maior Impacto Comunitário</div>
+        <div class="premio-desc">Quem mais multiplicou conhecimento e ajudou outras mães.</div>
+      </div>
+      <div class="premio-card fade-up">
+        <div class="premio-icon">⭐</div>
+        <div class="premio-title">Melhor Projeto Digital</div>
+        <div class="premio-desc">O serviço ou produto digital mais criativo e profissional.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contato">
+  <div class="container">
+    <h2 class="cta-title">O futuro da IA pode ser para todos.<br>Mas precisa começar com alguém.</h2>
+    <div class="big-numbers">
+      <div class="big-num-item">
+        <div class="big-num-value" style="color: var(--magenta)">16</div>
+        <div class="big-num-label">mulheres</div>
+      </div>
+      <div class="big-num-item">
+        <div class="big-num-value" style="color: var(--blue)">16</div>
+        <div class="big-num-label">computadores</div>
+      </div>
+      <div class="big-num-item">
+        <div class="big-num-value" style="color: var(--golden)">1 ano</div>
+        <div class="big-num-label">de IA</div>
+      </div>
+      <div class="big-num-item">
+        <div class="big-num-value" style="color: var(--green)">192</div>
+        <div class="big-num-label">vidas impactadas</div>
+      </div>
+    </div>
+    <p class="cta-phrase">Ao apoiar o Programa CRIA, sua empresa lidera uma nova era de inclusão produtiva digital no Brasil.</p>
+    <a href="mailto:contato@programacria.com.br" class="cta-button">Vamos construir esse futuro juntos?</a>
+  </div>
+</section>
+
+<footer>
+  <p>Programa CRIA — Capacitação em Renda e Inteligência Artificial</p>
+</footer>
+
+<script>
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// ODS icon fallback — if image fails, show colored placeholder with goal number
+document.querySelectorAll('.ods-card img').forEach(img => {
+  img.addEventListener('error', function() {
+    const card = this.closest('.ods-card');
+    const num = card.dataset.ods;
+    const color = card.dataset.color;
+    const wrap = this.parentElement;
+    wrap.innerHTML = `<div style="width:100%;aspect-ratio:1;background:${color};display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;font-family:Inter,sans-serif"><span style="font-size:3rem;font-weight:900">${num}</span><span style="font-size:0.7rem;font-weight:700;letter-spacing:2px">ODS</span></div>`;
+  });
+});
+</script>
+
+</body>
+</html>
